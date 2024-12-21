@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('talent_id');
             $table->unsignedBigInteger('mentor_id');
-            $table->string('certific_base64')->nullable();
+            $table->longText('certific_base64')->nullable();
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('rating');
