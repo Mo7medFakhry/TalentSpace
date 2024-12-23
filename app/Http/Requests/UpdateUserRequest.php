@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
             'email' => 'sometimes|email|max:255|unique:users',
             'password' => 'sometimes|min:6',
             'gender' => 'sometimes|in:Male,Female',
-            'role' => 'sometimes|in:Talent,Investor,Mentor',
+            'role' => 'sometimes|in:Talent,Investor,Mentor,Admin',
         ];
     }
 }

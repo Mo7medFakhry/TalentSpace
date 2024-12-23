@@ -26,7 +26,7 @@ class RegisterUserRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'gender' => 'required|in:Male,Female',
-            'role' => 'required|in:Talent,Investor,Mentor',
+            'role' => 'required|in:Talent,Investor,Mentor,Admin',
         ];
     }
 }
