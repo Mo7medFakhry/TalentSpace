@@ -54,7 +54,12 @@ class AdminController extends Controller
         ]);
 
         if ($user) {
-            return response()->json($user, 201);
+            return response()->json([
+                'Message' => 'User Created Successfully',
+                'User' => $user
+                ,
+                201
+            ]);
         }
     }
 
