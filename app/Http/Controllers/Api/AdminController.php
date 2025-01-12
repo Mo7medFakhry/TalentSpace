@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -25,6 +28,34 @@ class AdminController extends Controller
         }
 
         return response()->json($user);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+            'gender' => 'required|in:Male,Female',
+            'role' => 'required|in:Talent,Investor,Mentor',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 404);
+        }
+        $user = User::create([
+
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            'role' => $request->role,
+        ]);
+
+        if ($user) {
+            return response()->json($user, 201);
+        }
     }
 
     public function update(UpdateUserRequest $request, $id)
