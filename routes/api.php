@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\SocialiteController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,12 @@ Route::prefix('profile')->group(function () {
 });
 
 Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
+
+
+Route::get('auth/google' , [SocialiteController::class , 'redirectToGoogle']);
+Route::get('auth/google/callback' , [SocialiteController::class , 'handleGoogleCallback']);
+
+
+Route::get('auth/facebook', [SocialiteController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
+

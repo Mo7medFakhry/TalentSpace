@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('talent_id');
             $table->string('title');
             $table->text('description');
-            $table->longText('video_base64');
+            $table->longText('video');
             $table->string('tags')->nullable();
             $table->enum('Status', ['approved', 'pending', 'rejected']);
             $table->foreign('talent_id')->references('id')->on('users');
