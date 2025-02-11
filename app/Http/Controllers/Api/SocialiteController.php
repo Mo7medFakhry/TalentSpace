@@ -15,6 +15,7 @@ class SocialiteController extends Controller
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
+        
     }
 
     public function redirectToFacebook()
