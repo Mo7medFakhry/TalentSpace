@@ -14,7 +14,6 @@ class SocialiteController extends Controller
 {
     public function redirectToGoogle()
     {
-        session_start();
         return Socialite::driver('google')->redirect();
 
     }

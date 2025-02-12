@@ -31,6 +31,10 @@ Route::prefix('profile')->group(function () {
 Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 
 
+
+Route::middleware(['api', 'web'])->group(function () {
+
+
 Route::get('auth/google' , [SocialiteController::class , 'redirectToGoogle']);
 Route::get('auth/google/callback' , [SocialiteController::class , 'handleGoogleCallback']);
 
@@ -38,3 +42,4 @@ Route::get('auth/google/callback' , [SocialiteController::class , 'handleGoogleC
 Route::get('auth/facebook', [SocialiteController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
 
+});
