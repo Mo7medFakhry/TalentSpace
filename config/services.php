@@ -43,8 +43,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '9859642140734179',
-        'client_secret' => 'b824c59bae4889e2f1f6bafb83216c59',
+        'client_id' => '1158121405297427',
+        'client_secret' => 'da624f02baf2f5baefd8fa11a6543dba',
         'redirect' => 'https://promotiontalents-cegag6hybkexbgds.uaenorth-01.azurewebsites.net/api/auth/facebook/callback',
     ],
 
