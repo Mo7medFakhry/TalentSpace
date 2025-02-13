@@ -70,7 +70,7 @@ class SocialiteController extends Controller
             } else {
                 $newUser = User::create([
                     'name' => $user->name,
-                    'email' => $user->email::make('email@gmail.com'),
+                    'email' => $user->email,
                     'social_id' => $user->id,
                     'social_type' => 'facebook',
                     'password' => Hash::make('my-facebook')
