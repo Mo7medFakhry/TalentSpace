@@ -26,7 +26,7 @@ class UpdateProfileRequest extends FormRequest
             'address' => 'nullable|string|max:100',
             'birthday' => 'nullable|date',
             'bio' => 'nullable|string',
-            'profile_picture' => 'nullable|string',
+            'profilePicture' => 'nullable|string',
         ];
     }
 }
