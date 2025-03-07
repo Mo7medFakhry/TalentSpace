@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\FileMediaController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
@@ -20,6 +21,11 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
 Route::apiResource('users', AdminController::class)->middleware('auth:sanctum');
 
+
+Route::get('/videos', [FileMediaController::class, 'index']);
+Route::post('/video/upload', [FileMediaController::class, 'store']);
+Route::get('/video/show/{id}', [FileMediaController::class, 'show']);
+Route::delete('/video/delete/{id}', [FileMediaController::class, 'destroy']);
 
 Route::prefix('profile')->group(function () {
     Route::post('', [ProfileController::class, 'store']);

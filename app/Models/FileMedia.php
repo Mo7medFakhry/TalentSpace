@@ -9,6 +9,17 @@ class FileMedia extends Model
 {
     //
     use HasFactory;
+
+    protected $fillable = [
+        'talent_id',
+        'title',
+        'description',
+        'video',
+        'tags',
+        'Status',
+    ];
+
+
     // Relationships
     public function talent()
     {
