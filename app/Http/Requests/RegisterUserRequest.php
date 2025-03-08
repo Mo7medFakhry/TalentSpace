@@ -25,6 +25,10 @@ class RegisterUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:100',
+            'birthday' => 'nullable|date',
+            'bio' => 'nullable|string',
             'gender' => 'required|in:Male,Female',
             'role' => 'required|in:Talent,Investor,Mentor,Admin',
         ];

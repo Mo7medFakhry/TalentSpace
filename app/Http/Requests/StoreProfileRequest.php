@@ -22,10 +22,6 @@ class StoreProfileRequest extends FormRequest
     public function rules(): array
     {
         return[
-            'phone' => 'required|string|max:15',
-            'address' => 'nullable|string|max:100',
-            'birthday' => 'nullable|date',
-            'bio' => 'nullable|string',
             'profilePicture' => 'nullable|string' ,
         ];
     }

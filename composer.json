@@ -10,6 +10,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.17",
         "laravel/tinker": "^2.9",
+        "league/flysystem-azure-blob-storage": "^3.28",
         "spatie/laravel-permission": "^6.10"
     },
     "require-dev": {

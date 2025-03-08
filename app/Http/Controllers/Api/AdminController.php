@@ -37,6 +37,10 @@ class AdminController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
+            'phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:100',
+            'birthday' => 'nullable|date',
+            'bio' => 'nullable|string',
             'gender' => 'required|in:Male,Female',
             'role' => 'required|in:Talent,Investor,Mentor',
         ]);
@@ -49,6 +53,10 @@ class AdminController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'birthday' => $request->birthday,
+            'bio' => $request->bio,
             'gender' => $request->gender,
             'role' => $request->role,
         ]);

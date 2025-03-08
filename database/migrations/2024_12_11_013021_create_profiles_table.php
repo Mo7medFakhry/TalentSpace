@@ -14,11 +14,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users')->cascadeOnDelete();
-            $table->date('birthday')->nullable();
-            $table->string('phone', 11);
-            $table->string('bio')->nullable();
             $table->longText('profilePicture')->nullable();
-            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
