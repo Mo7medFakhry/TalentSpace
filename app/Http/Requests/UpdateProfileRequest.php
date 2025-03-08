@@ -22,7 +22,7 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'profilePicture' => 'nullable|string',
+            'profilePicture' => 'sometimes|string',
         ];
     }
 }

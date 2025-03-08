@@ -26,9 +26,9 @@ class UpdateUserRequest extends FormRequest
             'email' => 'sometimes|email|max:255',
             'password' => 'sometimes|min:6',
             'phone' => 'sometimes|string|max:15',
-            'address' => 'nullable|string|max:100',
-            'birthday' => 'nullable|date',
-            'bio' => 'nullable|string',
+            'address' => 'sometimes|string|max:100',
+            'birthday' => 'sometimes|date',
+            'bio' => 'sometimes|string',
             'gender' => 'sometimes|in:Male,Female',
             'role' => 'sometimes|in:Talent,Investor,Mentor,Admin',
         ];
