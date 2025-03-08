@@ -21,8 +21,7 @@ class StoreProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'user_id' => 'required|exists:users,id' ,
+        return[
             'phone' => 'required|string|max:15',
             'address' => 'nullable|string|max:100',
             'birthday' => 'nullable|date',
