@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        $profiles = Profile::all();
+        return response()->json($profiles);
+    }
 
     public function show($id)
     {

@@ -28,6 +28,7 @@ Route::get('/video/show/{id}', [FileMediaController::class, 'show']);
 Route::delete('/video/delete/{id}', [FileMediaController::class, 'destroy']);
 
 Route::prefix('profile')->group(function () {
+    Route::get('/all', [ProfileController::class, 'index']);
     Route::post('', [ProfileController::class, 'store']);
     Route::get('/{id}', [ProfileController::class, 'show']);
     Route::put('/{id}', [ProfileController::class, 'update']);
