@@ -32,6 +32,7 @@ Route::prefix('profile')->group(function () {
     Route::post('', [ProfileController::class, 'store']);
     Route::get('/{id}', [ProfileController::class, 'show']);
     Route::put('/{id}', [ProfileController::class, 'update']);
+    Route::delete('/delete/{id}', [ProfileController::class, 'destroy']);
 
 });
 
@@ -42,11 +43,11 @@ Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::middleware(['api', 'web'])->group(function () {
 
 
-Route::get('auth/google' , [SocialiteController::class , 'redirectToGoogle']);
-Route::get('auth/google/callback' , [SocialiteController::class , 'handleGoogleCallback']);
+    Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
+    Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
 
-Route::get('auth/facebook', [SocialiteController::class, 'redirectToFacebook']);
-Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
+    Route::get('auth/facebook', [SocialiteController::class, 'redirectToFacebook']);
+    Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
 
 });

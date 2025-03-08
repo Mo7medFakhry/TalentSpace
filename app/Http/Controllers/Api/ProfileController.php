@@ -37,4 +37,13 @@ class ProfileController extends Controller
         $profileu->update($request->validated());
         return response()->json($profileu, 201);
     }
+
+    public function destroy($id)
+    {
+        $profile = Profile::findOrFail($id);
+        $profile->delete();
+
+        return response()->json(['message' => 'Profile deleted successfully']);
+    }
+
 }
