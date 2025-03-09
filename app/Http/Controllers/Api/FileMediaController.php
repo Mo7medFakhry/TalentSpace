@@ -27,7 +27,7 @@ class FileMediaController extends Controller
             'tags' => 'required|string',
             'date' => 'required|date',
             'city' => 'required|string',
-            'status' => 'required|in:approved,pending,rejected',
+            'Status' => 'required|in:approved,pending,rejected',
         ]);
 
         $fileMedia = FileMedia::create($validatedData);
