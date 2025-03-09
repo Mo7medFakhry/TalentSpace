@@ -29,6 +29,7 @@ class UpdateUserRequest extends FormRequest
             'address' => 'sometimes|string|max:100',
             'birthday' => 'sometimes|date',
             'bio' => 'sometimes|string',
+            'profilePicture' => 'sometimes|string',
             'gender' => 'sometimes|in:Male,Female',
             'role' => 'sometimes|in:Talent,Investor,Mentor,Admin',
         ];

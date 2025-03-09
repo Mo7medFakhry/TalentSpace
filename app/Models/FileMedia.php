@@ -16,6 +16,8 @@ class FileMedia extends Model
         'description',
         'video',
         'tags',
+        'date',
+        'city',
         'Status',
     ];
 

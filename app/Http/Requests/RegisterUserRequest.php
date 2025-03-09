@@ -29,6 +29,7 @@ class RegisterUserRequest extends FormRequest
             'address' => 'nullable|string|max:100',
             'birthday' => 'nullable|date',
             'bio' => 'nullable|string',
+            'profilePicture' => 'nullable|string',
             'gender' => 'required|in:Male,Female',
             'role' => 'required|in:Talent,Investor,Mentor,Admin',
         ];

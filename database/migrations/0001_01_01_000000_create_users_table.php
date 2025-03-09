@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone', 11)->nullable();
             $table->string('bio')->nullable();
             $table->string('address')->nullable();
+            $table->longText('profilePicture')->nullable();
             $table->enum('gender', ['male', 'female']);
             $table->enum('role' , ['Talent' , 'Investor' , 'Mentor', 'Admin'])->default('Talent');
             $table->rememberToken();

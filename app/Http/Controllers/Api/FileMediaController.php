@@ -19,52 +19,51 @@ class FileMediaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'talent_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'video' => 'required|string',
-            'tags' => 'nullable|string',
-            'Status' => 'required|in:approved,pending,rejected',
+            'video_base64' => 'required|string',
+            'tags' => 'required|string',
+            'date' => 'required|date',
+            'city' => 'required|string',
+            'status' => 'required|in:approved,pending,rejected',
         ]);
 
-        $fileMedia = FileMedia::create([
-            'talent_id' => $request->talent_id,
-            'title' => $request->title,
-            'description' => $request->description,
-            'video' => $request->video,
-            'tags' => $request->tags,
-            'Status' => $request->Status,
-        ]);
+        $fileMedia = FileMedia::create($validatedData);
 
-        return response()->json($fileMedia, 201);
+        return response()->json([
+            'message' => 'Video successfully created.',
+            'data' => $fileMedia
+        ], 201);
     }
 
     // Update the specified resource in storage.
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        // Validate the request data with optional fields
+        $validatedData = $request->validate([
             'talent_id' => 'sometimes|exists:users,id',
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
-            'video' => 'sometimes|string',
-            'tags' => 'nullable|string',
-            'Status' => 'sometimes|in:approved,pending,rejected',
+            'video_base64' => 'sometimes|string',
+            'tags' => 'sometimes|string',
+            'date' => 'sometimes|date',
+            'city' => 'sometimes|string',
+            'status' => 'sometimes|in:approved,pending,rejected',
         ]);
 
+        // Find the FileMedia record or fail with a 404 response
         $fileMedia = FileMedia::findOrFail($id);
 
-        $fileMedia->update([
-            'talent_id' => $request->talent_id ?? $fileMedia->talent_id,
-            'title' => $request->title ?? $fileMedia->title,
-            'description' => $request->description ?? $fileMedia->description,
-            'video' => $request->video ?? $fileMedia->video,
-            'tags' => $request->tags ?? $fileMedia->tags,
-            'Status' => $request->Status ?? $fileMedia->Status,
-        ]);
+        // Update only the provided fields
+        $fileMedia->update($validatedData);
 
-        return response()->json($fileMedia, 200);
+        return response()->json([
+            'message' => 'Video  successfully updated.',
+            'data' => $fileMedia
+        ], 200);
     }
 
     /**

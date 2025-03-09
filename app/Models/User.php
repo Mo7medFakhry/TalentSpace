@@ -30,6 +30,7 @@ class User extends Authenticatable
         'address',
         'bio',
         'birthday',
+        'profilePicture',
         'social_id',
         'social_type',
     ];
@@ -58,11 +59,7 @@ class User extends Authenticatable
     }
 
     // Relationships
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
+    
     public function fileMedia()
     {
         return $this->hasMany(FileMedia::class, 'talent_id');

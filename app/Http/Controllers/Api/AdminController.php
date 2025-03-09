@@ -41,6 +41,7 @@ class AdminController extends Controller
             'address' => 'nullable|string|max:100',
             'birthday' => 'nullable|date',
             'bio' => 'nullable|string',
+            'profilePicture' => 'nullable|string',
             'gender' => 'required|in:Male,Female',
             'role' => 'required|in:Talent,Investor,Mentor',
         ]);
@@ -57,6 +58,7 @@ class AdminController extends Controller
             'address' => $request->address,
             'birthday' => $request->birthday,
             'bio' => $request->bio,
+            'profilePicture' => $request->profilePicture,
             'gender' => $request->gender,
             'role' => $request->role,
         ]);
