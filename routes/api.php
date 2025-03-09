@@ -28,17 +28,6 @@ Route::get('/video/show/{id}', [FileMediaController::class, 'show']);
 Route::delete('/video/delete/{id}', [FileMediaController::class, 'destroy']);
 
 
-Route::prefix('profile')->group(function () {
-    Route::get('/all', [ProfileController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('', [ProfileController::class, 'store'])->middleware('auth:sanctum');
-    Route::get('/{id}', [ProfileController::class, 'show'])->middleware('auth:sanctum');
-    Route::put('/{id}', [ProfileController::class, 'update'])->middleware('auth:sanctum');
-    Route::delete('/delete/{id}', [ProfileController::class, 'destroy'])->middleware('auth:sanctum');
-
-});
-
-Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
-
 
 
 Route::middleware(['api', 'web'])->group(function () {
