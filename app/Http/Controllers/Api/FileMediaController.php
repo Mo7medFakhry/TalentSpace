@@ -27,7 +27,7 @@ class FileMediaController extends Controller
             'tags' => 'required|string',
             'date' => 'required|date',
             'city' => 'required|string',
-            'Status' => 'required|in:approved,pending,rejected',
+            'thumbnail' => 'required|string',
         ]);
 
         $fileMedia = FileMedia::create($validatedData);
@@ -51,7 +51,7 @@ class FileMediaController extends Controller
             'tags' => 'sometimes|string',
             'date' => 'sometimes|date',
             'city' => 'sometimes|string',
-            'status' => 'sometimes|in:approved,pending,rejected',
+            'thumbnail' => 'sometimes|string',
         ]);
 
         // Find the FileMedia record or fail with a 404 response

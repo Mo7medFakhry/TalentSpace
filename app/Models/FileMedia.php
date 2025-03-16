@@ -18,7 +18,7 @@ class FileMedia extends Model
         'tags',
         'date',
         'city',
-        'Status',
+        'thumbnail',
     ];
 
 

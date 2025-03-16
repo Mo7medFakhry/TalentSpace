@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tags');
             $table->date('date');
             $table->string('city');
-            $table->enum('Status', ['approved', 'pending', 'rejected']);
+            $table->longText('thumbnail');
             $table->foreign('talent_id')->references('id')->on('users');
             $table->timestamps();
         });
