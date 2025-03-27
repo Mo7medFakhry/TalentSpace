@@ -72,7 +72,7 @@ class FileMediaController extends Controller
 
     public function show($id)
     {
-        $fileMedia = FileMedia::findOrFail($id);
+        $fileMedia = FileMedia::with('talent:id,name,profilePicture')->findOrFail($id);
         return response()->json($fileMedia);
     }
 
