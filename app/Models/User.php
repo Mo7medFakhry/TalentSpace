@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
 
     // Relationships
-    
+
     public function fileMedia()
     {
         return $this->hasMany(FileMedia::class, 'talent_id');
@@ -94,4 +94,39 @@ class User extends Authenticatable
     {
         return $this->hasMany(Achievement::class, 'mentor_id');
     }
+
+
+//-----------------Followers---------
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
+    }
+
+    public function follow(User $user): void
+    {
+        $this->following()->attach($user->id);
+    }
+
+    public function unfollow(User $user): void
+    {
+        $this->following()->detach($user->id);
+    }
+
+    public function isFollowing(User $user): bool
+    {
+        return $this->following()->where('following_id', $user->id)->exists();
+    }
+
+    public function isFollowedBy(User $user): bool
+    {
+        return $this->followers()->where('follower_id', $user->id)->exists();
+    }
+
+
 }

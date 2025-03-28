@@ -11,7 +11,7 @@ class FileMediaController extends Controller
 
     public function index()
     {
-        $videos = FileMedia::all();
+        $videos = FileMedia::with('talent:id,name,profile_picture')->get();
         return response()->json($videos);
     }
 
