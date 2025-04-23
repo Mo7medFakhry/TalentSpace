@@ -65,15 +65,16 @@ class User extends Authenticatable
         return $this->hasMany(FileMedia::class, 'talent_id');
     }
 
-    public function reviewRequestsGiven()
+    public function GivenReviews()
     {
-        return $this->hasMany(ReviewRequest::class, 'reviewer_id');
+        return $this->hasMany(Review::class, 'reviewer_id');
     }
 
-    public function reviewRequestsReceived()
+    public function ReceivedReviews()
     {
-        return $this->hasMany(ReviewRequest::class, 'reviewed_id');
+        return $this->hasMany(Review::class, 'reviewee_id');
     }
+
 
     public function offerRequestsAsInvestor()
     {

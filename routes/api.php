@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SocialiteController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\FollowController;
@@ -41,6 +42,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/followers/{user}', [FollowController::class, 'followers']);
     Route::get('/following/{user}', [FollowController::class, 'following']);
 
+
+
+    // ----------------Reviews----------------
+    Route::post('/reviews', [ReviewController::class, 'store']);
+    Route::get('/users/{id}/reviews', [ReviewController::class, 'showReviews']);
+
 });
 
 
@@ -48,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 //------------------Socialite----------------
 Route::middleware(['api', 'web'])->group(function () {
 
-    
+
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
