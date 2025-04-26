@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\FileMediaController;
 use App\Http\Controllers\Api\LoginController;
@@ -47,6 +48,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // ----------------Reviews----------------
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::get('/users/{id}/reviews', [ReviewController::class, 'showReviews']);
+
+
+
+    // ----------------Achievements----------------
+    Route::apiResource('achievements', AchievementController::class);
+
 
 });
 

@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('talent_id');
-            $table->unsignedBigInteger('mentor_id');
-            $table->longText('certific')->nullable();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->integer('rating');
+            $table->longText('certification')->nullable();
+            $table->string('Type');
+            $table->text('reviewMentor')->nullable();
             $table->enum('decision', ['approved', 'pending', 'rejected']);
-            $table->foreign('talent_id')->references('id')->on('users');
-            $table->foreign('mentor_id')->references('id')->on('users');
+            $table->foreignId('talent_id')->references('id')->on('users');
+            $table->foreignId('mentor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

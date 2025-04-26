@@ -10,6 +10,17 @@ class Achievement extends Model
     //
     use HasFactory;
 
+
+    protected $fillable = [
+        'talent_id',
+        'mentor_id',
+        'decision',
+        'Type',
+        'certification',
+        'reviewMentor',
+    ];
+
+
     // Relationships
     public function talent()
     {
