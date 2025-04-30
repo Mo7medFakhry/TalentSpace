@@ -49,9 +49,8 @@ class ReviewController extends Controller
         $user = User::findOrFail($userId);
 
         $reviews = $user->ReceivedReviews()
-            ->with(['reviewer:id,name,role']) // Include reviewer info
+            ->with(['reviewer:id,profilePicture,name,role']) // Include reviewer info
             ->get();
-
         return response()->json([
             'user' => [
                 'id' => $user->id,

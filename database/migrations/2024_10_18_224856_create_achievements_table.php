@@ -18,12 +18,11 @@ return new class extends Migration
             $table->text('reviewMentor')->nullable();
             $table->enum('decision', ['approved', 'pending', 'rejected']);
             $table->foreignId('talent_id')->references('id')->on('users');
-            $table->foreignId('mentor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
-    
+
     /**
      * Reverse the migrations.
      */

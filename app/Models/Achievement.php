@@ -13,7 +13,6 @@ class Achievement extends Model
 
     protected $fillable = [
         'talent_id',
-        'mentor_id',
         'decision',
         'Type',
         'certification',
@@ -25,10 +24,5 @@ class Achievement extends Model
     public function talent()
     {
         return $this->belongsTo(User::class, 'talent_id');
-    }
-
-    public function mentor()
-    {
-        return $this->belongsTo(User::class, 'mentor_id');
     }
 }
