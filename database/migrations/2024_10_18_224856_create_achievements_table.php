@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->longText('certification')->nullable();
             $table->string('Type');
+            $table->string('description')->nullable();
             $table->text('reviewMentor')->nullable();
             $table->enum('decision', ['approved', 'pending', 'rejected']);
             $table->foreignId('talent_id')->references('id')->on('users');

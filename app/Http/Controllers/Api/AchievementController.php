@@ -23,6 +23,7 @@ class AchievementController extends Controller
             'certification' => 'nullable|string',
             'reviewMentor' => 'nullable|string',
             'Type' => 'required|string',
+            'description' => 'nullable|string',
         ]);
 
         $achievement = Achievement::create($request->all());
@@ -35,7 +36,7 @@ class AchievementController extends Controller
 
     public function show($id)
     {
-        $achievement = Achievement::find($id);
+        $achievement = Achievement::with('talent:id,name,profilePicture')->find($id);
 
         if (!$achievement) {
             return response()->json(['message' => 'achievement not found'], 404);

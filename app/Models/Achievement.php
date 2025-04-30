@@ -15,6 +15,7 @@ class Achievement extends Model
         'talent_id',
         'decision',
         'Type',
+        'description',
         'certification',
         'reviewMentor',
     ];
