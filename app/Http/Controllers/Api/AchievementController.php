@@ -19,7 +19,6 @@ class AchievementController extends Controller
     {
         $request->validate([
             'talent_id' => 'required|exists:users,id',
-            'mentor_id' => 'required|exists:users,id',
             'decision' => 'in:approved,pending,rejected',
             'certification' => 'nullable|string',
             'reviewMentor' => 'nullable|string',
