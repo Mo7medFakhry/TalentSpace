@@ -25,7 +25,7 @@ return new class extends Migration {
 
             $table->foreignId("investor_id")->constrained("users")->onDelete("cascade");
             $table->foreignId("talent_id")->constrained("users")->onDelete("cascade");
-            $table->foreignId("admin_id")->nullable()->constrained("users");
+            $table->foreignId("admin_id")->nullable()->constrained("users")->onDelete("set null");
             $table->timestamps();
         });
     }

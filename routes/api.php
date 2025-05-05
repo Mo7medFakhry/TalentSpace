@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\AdminController;
-use App\Http\Controllers\Api\AdminOfferController;
 use App\Http\Controllers\Api\FileMediaController;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
@@ -87,18 +85,13 @@ Route::prefix('videos/{fileMedia}')->group(function () {
     });
 
     // --- Admin Offer Routes ---
-    Route::prefix("admin")->group(function () {
-            Route::get("/offers/pending", [AdminOfferController::class, "indexPending"])->name("offers.index.pending");
-            Route::post("/offers/{offer}/decide", [AdminOfferController::class, "decide"])->name("offers.decide");
-    });
-
-            //------------Notifications----------------
-    Route::get('/notifications', [NotificationController::class, 'index']);
-    Route::post('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
-    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead']);
-    Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount']);
+    Route::prefix("admin")->name("admin.")->group(function () {
+            Route::get("/offers/pending", [AdminController::class, "indexPending"])->name("offers.index.pending");
+            Route::post("/offers/{offer}/decide", [AdminController::class, "decide"])->name("offers.decide");
 
 
+
+});
 
 
 
