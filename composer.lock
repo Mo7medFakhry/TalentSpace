@@ -1613,8 +1613,7 @@
                         "Output": "Laravel\\Reverb\\Output"
                     },
                     "providers": [
-                        "Laravel\\Reverb\\ApplicationManagerServiceProvider",
-                        "Laravel\\Reverb\\ReverbServiceProvider"
+                        "Laravel\\Reverb\\ApplicationManagerServiceProvider"
                     ]
                 }
             },
