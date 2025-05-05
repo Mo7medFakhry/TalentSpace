@@ -1,12 +1,10 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
-use App\Notifications\NewFollowerNotification;
 
 class FollowController extends Controller
 {
@@ -17,7 +15,6 @@ class FollowController extends Controller
         }
 
         Auth::user()->follow($user);
-        $user->notify(new NewFollowerNotification(Auth::user()));
 
         return response()->json([
             'message' => 'Success follow',

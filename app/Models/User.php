@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, HasRoles;
+    use HasFactory, Notifiable, HasApiTokens , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -75,19 +75,20 @@ class User extends Authenticatable
         return $this->hasMany(Review::class, 'reviewee_id');
     }
 
-    public function offersMade()
+
+    public function offerAsInvestor()
     {
-        return $this->hasMany(Offer::class, "investor_id");
+        return $this->hasMany(Offer::class, 'investor_id');
     }
 
-    public function offersReceived()
+    public function offerAsTalent()
     {
-        return $this->hasMany(Offer::class, "talent_id");
+        return $this->hasMany(Offer::class, 'talent_id');
     }
 
-    public function offersProcessed()
+    public function offerAsAdmin()
     {
-        return $this->hasMany(Offer::class, "admin_id");
+        return $this->hasMany(Offer::class, 'admin_id');
     }
 
     public function achievementsAsTalent()
@@ -101,7 +102,7 @@ class User extends Authenticatable
     }
 
 
-    //-----------------Followers---------
+//-----------------Followers---------
 
     public function followers()
     {
@@ -131,23 +132,6 @@ class User extends Authenticatable
     public function isFollowedBy(User $user): bool
     {
         return $this->followers()->where('follower_id', $user->id)->exists();
-    }
-
-
-    //---------------------comments and likes --------------
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-
-    public function likedMedia()
-    {
-        return $this->belongsToMany(FileMedia::class, 'likes', 'user_id', 'file_media_id')->withTimestamps();
     }
 
 

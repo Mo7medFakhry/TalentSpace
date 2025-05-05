@@ -73,11 +73,7 @@ class FileMediaController extends Controller
     public function show($id)
     {
         $fileMedia = FileMedia::with('talent:id,name,profilePicture')->findOrFail($id);
-        $fileMedia->loadCount('likes');
-        $data = $fileMedia->toArray();
-        $data['total_likes'] = $fileMedia->total_likes;
-        $data['total_comments'] = $fileMedia->total_comments;
-        return response()->json($data);
+        return response()->json($fileMedia);
     }
 
     /**

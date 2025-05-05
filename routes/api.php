@@ -12,7 +12,6 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SocialiteController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\FollowController;
-use App\Http\Controllers\Api\VideoInteractionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,25 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/video/show/{id}', [FileMediaController::class, 'show']);
     Route::delete('/video/delete/{id}', [FileMediaController::class, 'destroy']);
 
-
-
-// ********************** comments and likes Notification ***********************
-
-Route::prefix('videos/{fileMedia}')->group(function () {
-    // Comments Routes
-    Route::get('/comments', [VideoInteractionController::class, 'getComments'])->name('videos.comments.index');
-    Route::post('/add-comment', [VideoInteractionController::class, 'addComment'])->name('videos.comments.store');
-
-    // Likes Routes
-    Route::post('/toggle-like', [VideoInteractionController::class, 'toggleLike'])->name('videos.likes.toggle');
-    Route::get('/likers', [VideoInteractionController::class, 'getLikers'])->name('videos.likers.index');
-});
-    // Separate route for deleting a comment
-    Route::delete('/comments/{comment}', [VideoInteractionController::class, 'deleteComment'])->name('videos.comments.destroy');
-    // *****************************
-
-
-
     // ----------------Followers----------------
     Route::post('/follow/{user}', [FollowController::class, 'follow']);
     Route::post('/unfollow/{user}', [FollowController::class, 'unfollow']);
@@ -77,20 +57,21 @@ Route::prefix('videos/{fileMedia}')->group(function () {
     Route::apiResource('achievements', AchievementController::class);
 
 
-    // --- Offer Routes (Investor & Talent) ---
-        Route::post("/offers", [OfferController::class, "store"])->name("offers.store");
-        Route::get("/offers/sent", [OfferController::class, "indexInvestor"])->name("offers.index.investor");
-        Route::get("/offers/received", [OfferController::class, "indexTalent"])->name("offers.index.talent");
-        Route::post("/offers/{offer}/respond", [OfferController::class, "respond"])->name("offers.respond");
+    // ----------------Offers----------------
+    Route::prefix('offers')->group(function () {
+        // Routes for all authenticated users
+        Route::get('/', [OfferController::class, 'index']);
+        Route::get('/{offer}', [OfferController::class, 'show']);
+
+        // Investor routes
+        Route::post('/', [OfferController::class, 'store'])->middleware('role:investor');
+
+        // Admin routes
+        Route::patch('/{offer}/admin-review', [OfferController::class, 'adminReview'])->middleware('role:admin');
+
+        // Talent routes
+        Route::patch('/{offer}/talent-review', [OfferController::class, 'talentReview'])->middleware('role:talent');
     });
-
-    // --- Admin Offer Routes ---
-    Route::prefix("admin")->name("admin.")->group(function () {
-            Route::get("/offers/pending", [AdminController::class, "indexPending"])->name("offers.index.pending");
-            Route::post("/offers/{offer}/decide", [AdminController::class, "decide"])->name("offers.decide");
-
-
-
 });
 
 
