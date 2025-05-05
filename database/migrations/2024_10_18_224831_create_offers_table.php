@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('investor_id');
-            $table->unsignedBigInteger('talent_id');
-            $table->string('title');
-            $table->text('content');
-            $table->enum('decision', ['approved', 'pending', 'rejected']);
-            $table->enum('state', ['admin', 'talent']);
-            $table->foreign('investor_id')->references('id')->on('users');
-            $table->foreign('talent_id')->references('id')->on('users');
+            $table->text('title');
+            $table->integer('amount');
+            $table->text('notes')->nullable();
+            $table->enum('status', ['adminAccepted', 'adminRejected', 'talentAccepted', 'talentRejected']);
+            $table->foreignId('investor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('talent_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

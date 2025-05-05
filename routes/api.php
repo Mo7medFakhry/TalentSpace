@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\FileMediaController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LogoutController;
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //----------------Videos----------------
     Route::get('/videos', [FileMediaController::class, 'index']);
     Route::post('/video/upload', [FileMediaController::class, 'store']);
+    Route::put('/video/update/{id}', [FileMediaController::class, 'update']);
     Route::get('/video/show/{id}', [FileMediaController::class, 'show']);
     Route::delete('/video/delete/{id}', [FileMediaController::class, 'destroy']);
 
@@ -55,6 +57,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('achievements', AchievementController::class);
 
 
+    // ----------------Offers----------------
+    Route::prefix('offers')->group(function () {
+        // Routes for all authenticated users
+        Route::get('/', [OfferController::class, 'index']);
+        Route::get('/{offer}', [OfferController::class, 'show']);
+
+        // Investor routes
+        Route::post('/', [OfferController::class, 'store'])->middleware('role:investor');
+
+        // Admin routes
+        Route::patch('/{offer}/admin-review', [OfferController::class, 'adminReview'])->middleware('role:admin');
+
+        // Talent routes
+        Route::patch('/{offer}/talent-review', [OfferController::class, 'talentReview'])->middleware('role:talent');
+    });
 });
 
 

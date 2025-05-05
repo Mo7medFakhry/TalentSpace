@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OfferRequest extends Model
+class Offer extends Model
 {
-    //
-    use HasFactory;
 
-    // Relationships
+    use HasFactory;
+    protected $fillable = [
+        'title',
+        'amount',
+        'notes',
+        'status',
+        'investor_id',
+        'talent_id',
+    ];
+
     public function investor()
     {
         return $this->belongsTo(User::class, 'investor_id');
@@ -20,5 +26,10 @@ class OfferRequest extends Model
     public function talent()
     {
         return $this->belongsTo(User::class, 'talent_id');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
     }
 }

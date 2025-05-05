@@ -76,14 +76,19 @@ class User extends Authenticatable
     }
 
 
-    public function offerRequestsAsInvestor()
+    public function offerAsInvestor()
     {
-        return $this->hasMany(OfferRequest::class, 'investor_id');
+        return $this->hasMany(Offer::class, 'investor_id');
     }
 
-    public function offerRequestsAsTalent()
+    public function offerAsTalent()
     {
-        return $this->hasMany(OfferRequest::class, 'talent_id');
+        return $this->hasMany(Offer::class, 'talent_id');
+    }
+
+    public function offerAsAdmin()
+    {
+        return $this->hasMany(Offer::class, 'admin_id');
     }
 
     public function achievementsAsTalent()
@@ -130,4 +135,9 @@ class User extends Authenticatable
     }
 
 
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
