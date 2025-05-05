@@ -100,5 +100,5 @@ class AdminController extends Controller
         return response()->json(['message' => 'User deleted'], 200);
     }
 
-
+// 
 }
