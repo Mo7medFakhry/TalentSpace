@@ -14,6 +14,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\FollowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\VideoInteractionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -56,22 +58,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // ----------------Achievements----------------
     Route::apiResource('achievements', AchievementController::class);
 
-
-    // ----------------Offers----------------
-    Route::prefix('offers')->group(function () {
-        // Routes for all authenticated users
-        Route::get('/', [OfferController::class, 'index']);
-        Route::get('/{offer}', [OfferController::class, 'show']);
-
-        // Investor routes
-        Route::post('/', [OfferController::class, 'store'])->middleware('role:investor');
-
-        // Admin routes
-        Route::patch('/{offer}/admin-review', [OfferController::class, 'adminReview'])->middleware('role:admin');
-
-        // Talent routes
-        Route::patch('/{offer}/talent-review', [OfferController::class, 'talentReview'])->middleware('role:talent');
-    });
 });
 
 
@@ -88,3 +74,27 @@ Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
 
 });
+
+// ********************** Follow Notification ***********************
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead']);
+    Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount']);
+});
+
+//------------ Comments and Likes Notifications--------------
+
+Route::prefix('videos/{fileMedia}')->middleware('auth:sanctum')->group(function () {
+    // Comments Routes
+    Route::get('/comments', [VideoInteractionController::class, 'getComments'])->name('videos.comments.index');
+    Route::post('/add-comment', [VideoInteractionController::class, 'addComment'])->name('videos.comments.store');
+
+    // Likes Routes
+    Route::post('/toggle-like', [VideoInteractionController::class, 'toggleLike'])->name('videos.likes.toggle');
+    Route::get('/likers', [VideoInteractionController::class, 'getLikers'])->name('videos.likers.index');
+});
+// Separate route for deleting a comment
+Route::delete('/comments/{comment}', [VideoInteractionController::class, 'deleteComment'])
+    ->middleware('auth:sanctum')
+    ->name('videos.comments.destroy');

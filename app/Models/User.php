@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class User extends Authenticatable
 {
@@ -140,4 +143,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
+
+//---------------------comments and likes --------------
+public function comments(): HasMany
+{
+    return $this->hasMany(Comment::class);
+}
+
+public function likes(): HasMany
+{
+    return $this->hasMany(Like::class);
+}
+
+public function likedMedia(): BelongsToMany
+{
+    return $this->belongsToMany(FileMedia::class, 'likes', 'user_id', 'file_media_id')->withTimestamps();
+}
 }
