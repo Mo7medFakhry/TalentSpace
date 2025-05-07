@@ -107,7 +107,7 @@ Route::delete('/comments/{comment}', [VideoInteractionController::class, 'delete
 Route::middleware(["auth:sanctum"])->group(function () {
     Route::get("/allOffers", [OfferController::class, "index"])->name("offers.index");
 
-    Route::post("/offers", [OfferController::class, "store"])->name("offers.store");
+    Route::post("/offer", [OfferController::class, "store"])->name("offers.store");
     // -------- All offers sent by Investor -----------
     Route::get("/offers/sent", [OfferController::class, "indexInvestor"])->name("offers.index.investor");
     // -------- All offers received by talent
