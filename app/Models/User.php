@@ -145,18 +145,41 @@ class User extends Authenticatable
     }
 
 //---------------------comments and likes --------------
-public function comments(): HasMany
-{
-    return $this->hasMany(Comment::class);
-}
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 
-public function likes(): HasMany
-{
-    return $this->hasMany(Like::class);
-}
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
 
-public function likedMedia(): BelongsToMany
-{
-    return $this->belongsToMany(FileMedia::class, 'likes', 'user_id', 'file_media_id')->withTimestamps();
-}
+    public function likedMedia(): BelongsToMany
+    {
+        return $this->belongsToMany(FileMedia::class, 'likes', 'user_id', 'file_media_id')->withTimestamps();
+    }
+
+    // ---------- Offers ------------
+
+    public function offersMade(): HasMany
+    {
+        return $this->hasMany(Offer::class, "investor_id");
+    }
+
+    /**
+     * Get the offers received by the user (as a talent).
+     */
+    public function offersReceived(): HasMany
+    {
+        return $this->hasMany(Offer::class, "talent_id");
+    }
+
+    /**
+     * Get the offers processed by the user (as an admin).
+     */
+    public function offersProcessed(): HasMany
+    {
+        return $this->hasMany(Offer::class, "admin_id");
+    }
 }

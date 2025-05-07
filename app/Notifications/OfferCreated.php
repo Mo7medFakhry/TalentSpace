@@ -4,65 +4,52 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use App\Models\Offer;
 
 class OfferCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $offer;
+    protected Offer $offer;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
     public function __construct(Offer $offer)
     {
         $this->offer = $offer;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database', 'broadcast'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->line('A new offer has been created and requires your review.')
-            ->line('Title: ' . $this->offer->title)
-            ->line('Amount: $' . $this->offer->amount)
-            ->action('Review Offer', url('/admin/offers/' . $this->offer->id))
-            ->line('Thank you for using our application!');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable): array
     {
         return [
             'offer_id' => $this->offer->id,
+            'investor_id' => $this->offer->investor_id,
+            'amount' => $this->offer->amount,
             'title' => $this->offer->title,
-            'message' => 'New offer created by ' . $this->offer->investor->name,
+            'investor_name' => optional($this->offer->investor)->name,
+            'message' => 'New offer created by ' . optional($this->offer->investor)->name,
         ];
+    }
+
+    public function toBroadcast($notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage([
+            'id' => $this->id,
+            'read_at' => null,
+            'created_at' => now()->toIso8601String(),
+            'data' => [
+                'offer_id' => $this->offer->id,
+                'investor_id' => $this->offer->investor_id,
+                'amount' => $this->offer->amount,
+                'title' => $this->offer->title,
+                'investor_name' => optional($this->offer->investor)->name,
+                'message' => 'New offer created by ' . optional($this->offer->investor)->name,
+            ]
+        ]);
     }
 }

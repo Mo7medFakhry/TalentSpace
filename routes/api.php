@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\VideoInteractionController;
+use App\Models\FileMedia;
+use App\Models\Comment;
+use App\Http\Controllers\Api\AdminOfferController;
+use App\Models\Offer;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -57,7 +61,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // ----------------Achievements----------------
     Route::apiResource('achievements', AchievementController::class);
-
 });
 
 
@@ -98,3 +101,25 @@ Route::prefix('videos/{fileMedia}')->middleware('auth:sanctum')->group(function 
 Route::delete('/comments/{comment}', [VideoInteractionController::class, 'deleteComment'])
     ->middleware('auth:sanctum')
     ->name('videos.comments.destroy');
+
+
+    // --- Offer Routes (Investor & Talent) ---
+Route::middleware(["auth:sanctum"])->group(function () {
+    Route::get("/allOffers", [OfferController::class, "index"])->name("offers.index");
+
+    Route::post("/offers", [OfferController::class, "store"])->name("offers.store");
+    // -------- All offers sent by Investor -----------
+    Route::get("/offers/sent", [OfferController::class, "indexInvestor"])->name("offers.index.investor");
+    // -------- All offers received by talent
+    Route::get("/offers/received", [OfferController::class, "indexTalent"])->name("offers.index.talent");
+    // -------- Accept Offer
+    Route::post("/offers/{offer}/respond", [OfferController::class, "respond"])->name("offers.respond");
+});
+
+// --- Admin Offer Routes ---
+Route::middleware(["auth:sanctum"])
+    ->prefix("admin")->name("admin.")->group(function () {
+    Route::get("/offers/pending", [AdminOfferController::class, "indexPending"])->name("offers.index.pending");
+    Route::post("/offers/{offer}/decide", [AdminOfferController::class, "decide"])->name("offers.decide");
+});
+
