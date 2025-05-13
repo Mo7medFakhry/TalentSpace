@@ -25,7 +25,7 @@ class AdminOfferController extends Controller
         $offers = Offer::where("status", "pendingAdminApproval")
                         ->with(["investor:id,name", "talent:id,name"])
                         ->latest()
-                        ->paginate(15);
+                        ->paginate(30);
         return response()->json($offers);
     }
 

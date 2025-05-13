@@ -35,7 +35,7 @@ class NewLikeNotification extends Notification implements ShouldQueue
         return [
             'liker_id' => $this->liker->id,
             'liker_name' => $this->liker->name,
-            'liker_picture' => $this->liker->profilePicture ?? null,
+            'liker_picture' => $this->liker->profilePicture,
             'file_media_id' => $this->fileMedia->id,
             'file_media_thumbnail' => $this->fileMedia->thumbnail,
             'message' => $this->liker->name . ' liked your video.',

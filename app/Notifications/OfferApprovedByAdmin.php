@@ -33,6 +33,7 @@ class OfferApprovedByAdmin extends Notification implements ShouldQueue
             "offer_title" => $this->offer->title,
             "offer_amount" => $this->offer->amount,
             "investor_name" => $this->offer->investor->name,
+            "investor_picture" => $this->offer->investor->profilePicture,
             "admin_name" => $this->admin->name,
             "message" => "Good news! You have received a new offer titled '" . $this->offer->title . "' from " . $this->offer->investor->name . ", approved by admin " . $this->admin->name . ". Please review and respond.",
         ];

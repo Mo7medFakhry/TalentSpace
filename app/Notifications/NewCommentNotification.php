@@ -39,7 +39,7 @@ class NewCommentNotification extends Notification implements ShouldQueue
         return [
             'commenter_id' => $this->commenter->id,
             'commenter_name' => $this->commenter->name,
-            'commenter_picture' => $this->commenter->profilePicture ?? null,
+            'commenter_picture' => $this->commenter->profilePicture ,
             'comment_id' => $this->comment->id,
             'comment_body' => $this->comment->body,
             'file_media_id' => $this->fileMedia->id,
