@@ -52,11 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/following/{user}', [FollowController::class, 'following']);
 
 
-
     // ----------------Reviews----------------
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::get('/users/{id}/reviews', [ReviewController::class, 'showReviews']);
-
 
 
     // ----------------Achievements----------------
