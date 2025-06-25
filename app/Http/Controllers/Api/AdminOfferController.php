@@ -23,7 +23,7 @@ class AdminOfferController extends Controller
     {
         $this->checkAdminRole();
         $offers = Offer::where("status", "pendingAdminApproval")
-                        ->with(["investor:id,name", "talent:id,name"])
+                        ->with(["investor:id,name,email,phone,profilePicture", "talent:id,name,email,phone,profilePicture"])
                         ->latest()
                         ->paginate(30);
         return response()->json($offers);

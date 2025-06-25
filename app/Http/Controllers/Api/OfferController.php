@@ -62,7 +62,7 @@ class OfferController extends Controller
     {
         $investor = Auth::user();
         $offers = $investor->offersMade()
-                            ->with("talent:id,name,profilePicture")
+                            ->with("talent:id,name,email,phone,profilePicture")
                             ->latest()
                             ->paginate(15);
         return response()->json($offers);
@@ -73,7 +73,7 @@ class OfferController extends Controller
         $talent = Auth::user();
         $offers = $talent->offersReceived()
                         ->where("status", "adminAccepted")
-                        ->with("investor:id,name,profilePicture")
+                        ->with("investor:id,name,email,phone,profilePicture")
                         ->latest()
                         ->paginate(15);
         return response()->json($offers);
