@@ -63,6 +63,23 @@ class ReviewController extends Controller
         ]);
     }
 
+    /**
+     * Show the best talents based on average review ratings.
+     * Returns top 10 talents with their info, average rating, and review count.
+     */
+    public function bestTalents()
+    {
+        $talents = User::where('role', 'Talent')
+            ->withCount(['ReceivedReviews as reviews_count'])
+            ->withAvg('ReceivedReviews as average_rating', 'rating')
+            ->orderByDesc('average_rating')
+            ->orderByDesc('reviews_count')
+            ->take(10)
+            ->get(['id', 'name', 'profilePicture', 'role']);
 
+        return response()->json([
+            'talents' => $talents
+        ]);
+    }
 
 }

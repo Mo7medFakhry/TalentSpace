@@ -55,6 +55,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // ----------------Reviews----------------
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::get('/users/{id}/reviews', [ReviewController::class, 'showReviews']);
+    // ----------------Best Talents----------------
+    Route::get('/reviews/bestTalents', [ReviewController::class, 'bestTalents']);
+
 
 
     // ----------------Achievements----------------
@@ -120,4 +123,5 @@ Route::middleware(["auth:sanctum"])
     Route::get("/offers/pending", [AdminOfferController::class, "indexPending"])->name("offers.index.pending");
     Route::post("/offers/{offer}/decide", [AdminOfferController::class, "decide"])->name("offers.decide");
 });
+
 
