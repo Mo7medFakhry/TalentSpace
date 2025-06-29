@@ -82,4 +82,27 @@ class ReviewController extends Controller
         ]);
     }
 
+    /**
+     * Show all reviews that were sent by mentors.
+     */
+    public function reviewsByUser($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $reviews = $user->GivenReviews()
+            ->with(['reviewee:id,name,profilePicture,role'])
+            ->get();
+
+        return response()->json([
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'role' => $user->role,
+            ],
+            'reviews_count' => $reviews->count(),
+            'rating' => $reviews->avg('rating'),
+            'reviews' => $reviews
+        ]);
+    }
+
 }
