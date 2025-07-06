@@ -33,6 +33,8 @@ class OfferAcceptedByTalent extends Notification implements ShouldQueue
             "offer_title" => $this->offer->title,
             "talent_name" => $this->talent->name,
             "talent_picture" => $this->talent->profilePicture,
+            "investor_name" => $this->offer->investor->name,
+            "investor_picture" => $this->offer->investor->profilePicture,
             "message" => "Congratulations! Your offer '" . $this->offer->title . "' has been accepted by talent " . $this->talent->name . ".",
         ];
     }

@@ -116,6 +116,8 @@ Route::middleware(["auth:sanctum"])->group(function () {
     Route::get("/offers/received", [OfferController::class, "indexTalent"])->name("offers.index.talent");
     // -------- Accept Offer
     Route::post("/offers/{offer}/respond", [OfferController::class, "respond"])->name("offers.respond");
+
+    Route::get('/talent/offers', [OfferController::class, 'allOffersForTalent']);
 });
 
 // --- Admin Offer Routes ---

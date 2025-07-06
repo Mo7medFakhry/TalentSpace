@@ -33,6 +33,9 @@ class OfferRejectedByAdmin extends Notification implements ShouldQueue
             "offer_title" => $this->offer->title,
             "talent_name" => $this->offer->talent->name,
             "admin_name" => $this->admin->name,
+            "talent_picture" => $this->offer->talent->profilePicture,
+            "investor_name" => $this->offer->investor->name,
+            "investor_picture" => $this->offer->investor->profilePicture,
             "message" => "Unfortunately, your offer '" . $this->offer->title . "' for " . $this->offer->talent->name . " was rejected by admin " . $this->admin->name . ".",
         ];
     }

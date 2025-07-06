@@ -105,4 +105,20 @@ class OfferController extends Controller
 
         return response()->json($offer);
     }
+
+    public function allOffersForTalent(Request $request)
+    {
+        $talent = Auth::user();
+
+        if ($talent->role !== "Talent") {
+            return response()->json(["message" => "Unauthorized: Talent role required"], 403);
+        }
+
+        $offers = $talent->offersReceived()
+            ->with("investor:id,name,email,phone,profilePicture")
+            ->latest()
+            ->paginate(15);
+
+        return response()->json($offers);
+    }
 }

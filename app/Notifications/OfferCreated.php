@@ -32,6 +32,7 @@ class OfferCreated extends Notification implements ShouldQueue
             'amount' => $this->offer->amount,
             'title' => $this->offer->title,
             'investor_name' => optional($this->offer->investor)->name,
+            'investor_picture' => optional($this->offer->investor)->profilePicture,
             'message' => 'New offer created by ' . optional($this->offer->investor)->name,
         ];
     }
@@ -48,6 +49,7 @@ class OfferCreated extends Notification implements ShouldQueue
                 'amount' => $this->offer->amount,
                 'title' => $this->offer->title,
                 'investor_name' => optional($this->offer->investor)->name,
+                'investor_picture' => optional($this->offer->investor)->profilePicture,
                 'message' => 'New offer created by ' . optional($this->offer->investor)->name,
             ]
         ]);

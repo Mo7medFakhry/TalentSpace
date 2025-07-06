@@ -32,6 +32,9 @@ class OfferRejectedByTalent extends Notification implements ShouldQueue
             "offer_id" => $this->offer->id,
             "offer_title" => $this->offer->title,
             "talent_name" => $this->talent->name,
+            "talent_picture" => $this->talent->profilePicture,
+            "investor_name" => $this->offer->investor->name,
+            "investor_picture" => $this->offer->investor->profilePicture,
             "message" => "Regarding your offer '" . $this->offer->title . "', talent " . $this->talent->name . " has rejected the offer.",
         ];
     }
