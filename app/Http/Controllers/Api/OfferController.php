@@ -115,6 +115,7 @@ class OfferController extends Controller
         }
 
         $offers = $talent->offersReceived()
+            ->whereIn("status" , ["adminAccepted", "talentAccepted", "talentRejected"])
             ->with("investor:id,name,email,phone,profilePicture")
             ->latest()
             ->paginate(15);
